@@ -1,0 +1,34 @@
+
+GET http://localhost:3000/getdata
+
+###
+
+
+POST  http://localhost:3000/signIn
+Content-Type: application/json
+
+{
+    "email": "amr7afifi@gmail.com",
+    "password": "passwo2rd"
+}
+
+###
+
+
+POST  http://localhost:3000/signUp
+Content-Type: application/json
+
+{
+    "email": "amr7afifi@gmail.com",
+    "password": "password",
+    "first": "Amr",
+    "last": "Afifi",
+    "gender": "male",
+    "username": "amr3afifi",
+    "role": "fan",
+    "dateOfBirth": "1998-07-26",
+    "address": "DL",
+    "city": "Giza"
+}
+
+###
