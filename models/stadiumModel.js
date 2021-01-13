@@ -1,8 +1,3 @@
-/** MongoDB Model for the Stadium object.
- * @module models/stadium
- * @requires mongoose
- */
-
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config({ path: './../.env' })
@@ -19,7 +14,7 @@ const stadiumSchema = new Schema({
     required: [true, 'Please number of rows'],
     trim: true
   },
-  seat: {
+  seats: {
     type: Number,
     required: [true, 'Please number of seats in a row'],
     trim: true

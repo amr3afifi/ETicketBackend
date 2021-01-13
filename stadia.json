@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "5ff9b8904c695a32c068c1e5"
+  },
+  "name": "Cairo Stadium",
+  "rows": 10,
+  "seats": 20
+},{
+  "_id": {
+    "$oid": "5ff9b9694c695a32c068c1e7"
+  },
+  "name": "Alexandria Stadium",
+  "rows": 8,
+  "seats": 18
+},{
+  "_id": "5ff9b9cb4c695a32c068c1e9",
+  "name": "Al-Salam Stadium",
+  "rows": 9,
+  "seats": 15
+},{
+  "_id": {
+    "$oid": "5ffc8339d7e01a270016209e"
+  },
+  "name": "Al-99757Ahly",
+  "rows": 2,
+  "seats": 5
+},{
+  "_id": {
+    "$oid": "5ffc88fea2f86f369839456f"
+  },
+  "name": "Enpp9i",
+  "rows": 7,
+  "seats": 7
+},{
+  "_id": {
+    "$oid": "5ffc8901a2f86f3698394570"
+  },
+  "name": "Enpp9i",
+  "rows": 7,
+  "seats": 7
+},{
+  "_id": {
+    "$oid": "5ffcc0744f2e8138a8448351"
+  },
+  "name": "Kafr El Batee5 Stadium",
+  "rows": 5,
+  "seats": 5
+},{
+  "_id": {
+    "$oid": "5ffcd3d6abe0d51ce0f1e762"
+  },
+  "name": "Kafr El Batee5 2 Stadium",
+  "rows": 5,
+  "seats": 5
+}]

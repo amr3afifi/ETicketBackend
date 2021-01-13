@@ -1,0 +1,119 @@
+
+GET http://localhost:3000/clubs
+
+###
+
+
+POST  http://localhost:3000/signIn
+Content-Type: application/json
+
+{
+    "email": "amr3afifi@gmail.com",
+    "password": "password"
+}
+
+###
+
+
+
+GET http://localhost:3000/matches
+
+###
+
+POST http://localhost:3000/createMatch
+Content-Type: application/json
+
+{
+   "team1": "LOLO",
+   "team2": "ABOLO",
+   "stadium": "Al-Salam Stadium",
+   "date": "2100-12-12",
+   "time": "2020-12-12",
+   "refree": "Ahmed HAbdel Samee3",
+   "lineman1": "MohameHd Abdel Samee3",
+   "lineman2": "7omoHs"
+}
+
+###
+
+DELETE  http://localhost:3000/deleteMatch
+Content-Type: application/json
+
+{
+   "id": "5ffb68d08bab288ca37dcef8"
+}
+
+###
+
+GET http://localhost:3000/stadiums
+
+###
+
+
+POST http://localhost:3000/createStadium
+Content-Type: application/json
+
+{
+    "name": "Kafr El Batee5 3 Stadium",
+    "rows": 5,
+    "seats": 5
+}
+
+###
+
+
+PUT   http://localhost:3000/approveUser
+Content-Type: application/json
+
+{
+    "id": "5fff54e57c6727080c1f7b61"
+}
+
+###
+
+POST  http://localhost:3000/signUp
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com",
+    "password": "password",
+    "first": "youssef",
+    "last": "ghattas",
+    "gender": "amle",
+    "username": "admoon",
+    "role": "admin",
+    "dateOfBirth": "1998-07-26",
+    "address": "LAND",
+    "city": "TOWN"
+}
+
+###
+
+DELETE   http://localhost:3000/deleteUser
+Content-Type: application/json
+
+{
+    "id": "5fff3b8f159ed43420f8df4d"
+}
+
+###
+
+
+GET http://localhost:3000/getActiveUsers
+
+###
+
+
+GET http://localhost:3000/getInActiveUsers
+
+###
+
+PUT  http://localhost:3000/editMatch
+Content-Type: application/json
+
+{
+    "id": "5ffe3f864e8b19471cb96f65",
+    "team1":"Enppi"
+}
+
+###

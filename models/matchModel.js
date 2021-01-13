@@ -1,8 +1,3 @@
-/** MongoDB Model for the Match object.
- * @module models/match
- * @requires mongoose
- */
-
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config({ path: './../.env' })
@@ -24,31 +19,34 @@ const matchSchema = new Schema({
     required: [true, 'Please provide stadium'],
     trim: true
   },
+  refree: {
+    type: String,
+    required: [true, 'Please provide refree'],
+    trim: true
+  },
+  lineman1: {
+    type: String,
+    required: [true, 'Please provide lineman1'],
+    trim: true
+  },
+  lineman2: {
+    type: String,
+    required: [true, 'Please provide lineman2'],
+    trim: true
+  },
   date: {
     type: String,
     format: Date,
-    default: '2021-01-01',
-    validate: {
-      validator: function () {
-        todaysDate = new Date();
-        enteredDate=new Date(this.date);
-        return (enteredDate>=todaysDate)
-      }
-    }
+    default: '2021-01-01'
   },
   time: {
     type: String,
     format: Date,
-    default: '00:00',
-    validate: {
-      validator: function () {
-        todaysDate = new Date();
-        enteredDate=new Date(this.date);
-        return (enteredDate>=todaysDate)
-      }
-    }
+    default: '00:00'
   },
-  seats: []
+  seats: {
+    type: Array
+  }
 })
 
 const Match = mongoose.model('Match', matchSchema)

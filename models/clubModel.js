@@ -1,8 +1,3 @@
-/** MongoDB Model for the Club object.
- * @module models/club
- * @requires mongoose
- */
-
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config({ path: './../.env' })

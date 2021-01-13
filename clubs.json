@@ -1,0 +1,86 @@
+[{
+  "_id": {
+    "$oid": "5ff625849fa886933db869d8"
+  },
+  "name": "Al-Ahly"
+},{
+  "_id": {
+    "$oid": "5ff625a39fa886933db869d9"
+  },
+  "name": "Al-Zamalek"
+},{
+  "_id": {
+    "$oid": "5ffb48e68bab288ca37dcee9"
+  },
+  "name": "Enppi"
+},{
+  "_id": {
+    "$oid": "5ffb48fe8bab288ca37dceea"
+  },
+  "name": "Pyramids-FC"
+},{
+  "_id": {
+    "$oid": "5ffb491f8bab288ca37dceeb"
+  },
+  "name": "El-Gouna"
+},{
+  "_id": {
+    "$oid": "5ffb49418bab288ca37dceec"
+  },
+  "name": "El-Dakhleya"
+},{
+  "_id": {
+    "$oid": "5ffb497f8bab288ca37dceed"
+  },
+  "name": "Wadi Degla"
+},{
+  "_id": {
+    "$oid": "5ffb49898bab288ca37dceee"
+  },
+  "name": "Tanta"
+},{
+  "_id": {
+    "$oid": "5ffb49908bab288ca37dceef"
+  },
+  "name": "Smouha"
+},{
+  "_id": {
+    "$oid": "5ffb49a78bab288ca37dcef0"
+  },
+  "name": "Misr El Makasa"
+},{
+  "_id": {
+    "$oid": "5ffb49bf8bab288ca37dcef1"
+  },
+  "name": "Ismaily"
+},{
+  "_id": {
+    "$oid": "5ffb49cd8bab288ca37dcef2"
+  },
+  "name": "Aswan-SC"
+},{
+  "_id": {
+    "$oid": "5ffb49db8bab288ca37dcef3"
+  },
+  "name": "FC-Masr"
+},{
+  "_id": {
+    "$oid": "5ffb49f98bab288ca37dcef4"
+  },
+  "name": "Al-Ittihad"
+},{
+  "_id": {
+    "$oid": "5ffb4a038bab288ca37dcef5"
+  },
+  "name": "Al Mokawloon"
+},{
+  "_id": {
+    "$oid": "5ffb4a0c8bab288ca37dcef6"
+  },
+  "name": "El Geish"
+},{
+  "_id": {
+    "$oid": "5ffb4a1d8bab288ca37dcef7"
+  },
+  "name": "El Entag El Harby"
+}]
