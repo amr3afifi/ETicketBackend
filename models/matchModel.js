@@ -41,7 +41,6 @@ const matchSchema = new Schema({
   },
   time: {
     type: String,
-    format: Date,
     default: '00:00'
   },
   seats: {

@@ -13,7 +13,7 @@ exports.deleteMatch = catchAsync(async (req, res, next) => {
     const user= await Match.findByIdAndDelete(req.body.id)
   if(user!=null)
   {res.status(200).json({status: 'Success', success: true})}
-  else{res.status(401).json(new AppError('Match not found!', 401));}
+  else{res.status(200).json(new AppError('Match not found!', 401));}
   
 })
 
@@ -33,7 +33,7 @@ exports.createMatch = catchAsync(async (req, res, next) => {
     const stadiumCheck = await Match.find({ stadium })
     
     if(date<=new Date())
-    {res.status(401).json({statusCode: 401, status: 'fail',name:'Cannot create a match with a past date or on the same day '});}
+    {res.status(200).json({statusCode: 401, status: 'fail',name:'Cannot create a match with a past date or on the same day '});}
   
 
     matches1.forEach(function (arrayItem) 
@@ -41,7 +41,7 @@ exports.createMatch = catchAsync(async (req, res, next) => {
         if(arrayItem.date == date)
         {
             valid=false;
-            res.status(401).json({statusCode: 401, status: 'fail',name:'Team 1 cannot have 2 matches on the same day'});
+            res.status(200).json({statusCode: 401, status: 'fail',name:'Team 1 cannot have 2 matches on the same day'});
         }
     });
 
@@ -51,7 +51,7 @@ exports.createMatch = catchAsync(async (req, res, next) => {
             if(arrayItem.date == date)
             {
                 valid=false;
-                res.status(401).json({statusCode: 401, status: 'fail',name:'Team 2 cannot have 2 matches on the same day'});
+                res.status(200).json({statusCode: 401, status: 'fail',name:'Team 2 cannot have 2 matches on the same day'});
             }
         });
     }
@@ -63,7 +63,7 @@ exports.createMatch = catchAsync(async (req, res, next) => {
             if(arrayItem.date == date)
             {
                 valid=false;
-                res.status(401).json({statusCode: 401, status: 'fail',name:'Cannot have 2 matches on the same stadium on the same time '});
+                res.status(200).json({statusCode: 401, status: 'fail',name:'Cannot have 2 matches on the same stadium on the same time '});
             }
         });
     }
@@ -125,7 +125,7 @@ if(match!=null)
 
   if(req.body.date!='' && req.body.date!=null && req.body.date>new Date())
   {
-      if(req.body.date<=new Date())
+      if(new Date(req.body.date)<=new Date())
     {res.status(401).json({statusCode: 401, status: 'fail',name:'Cannot create a match with a past date or on the same day '});}
   
     match.date=req.body.date;change=true;}

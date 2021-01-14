@@ -12,6 +12,7 @@ const Stadium = require(`./../models/stadiumModel.js`);
 
   exports.createStadium = catchAsync(async (req, res, next) => {
     const name = req.body.name
+    console.log(name)
     const check = await Stadium.findOne({ name })
     if(check==null)
     {
@@ -25,7 +26,7 @@ const Stadium = require(`./../models/stadiumModel.js`);
    
     }
     else{ 
-      res.status(401).json({statusCode: 401, status: 'fail',name:'Stadium already exists'})
+      res.status(200).json({statusCode: 401, status: 'fail',name:'Stadium already exists'})
     }
   
   })
