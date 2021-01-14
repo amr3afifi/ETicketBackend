@@ -7,6 +7,6 @@ router.get('/matches', matchController.getMatches)
 router.put('/deleteMatch', matchController.deleteMatch)
 router.post('/createMatch', matchController.createMatch)
 router.put('/editMatch', matchController.editMatch)
-router.get('/getMatch', matchController.getMatch)
+router.put('/getMatch', matchController.getMatch)
 
 module.exports = router

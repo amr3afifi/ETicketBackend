@@ -112,7 +112,16 @@ PUT  http://localhost:3000/editMatch
 Content-Type: application/json
 
 {
-    "id": "5ffe3f864e8b19471cb96f65",
+    "id": "5fff80016b2c942528c84ab5",
+    "team1":"Enppi"
+}
+
+###
+GET  http://localhost:3000/getMatch
+Content-Type: application/json
+
+{
+    "id": "5fff80016b2c942528c84ab5",
     "team1":"Enppi"
 }
 

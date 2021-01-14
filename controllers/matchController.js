@@ -91,7 +91,9 @@ exports.createMatch = catchAsync(async (req, res, next) => {
 });
 
 exports.editMatch = catchAsync(async (req, res, next) => {
-const match= await  Match.findOne({ _id: req.body.id},err => {console.log(err)});
+console.log(req.body);
+const match= await Match.findOne({ _id: req.body.id},err => {console.log(err)});
+
 if(match!=null)
 {
   change=false;
@@ -99,36 +101,45 @@ if(match!=null)
     {
         const team1=req.body.team1;
         const matches1 = await Match.find({ team1 });
+        console.log(matches1);
         matches1.forEach(function (arrayItem) 
         {
-            if(arrayItem.date == date)
+            if(arrayItem.date == req.body.date)
             {
-                res.status(401).json({statusCode: 401, status: 'fail',name:'Team 1 cannot have 2 matches on the same day'});
+                console.log('ana gowa yua man')
+                res.status(200).json({statusCode: 401, status: 'fail',name:'Team 1 cannot have 2 matches on the same day'});
             }
         }); 
         match.team1=req.body.team1;change=true;}
+    console.log("bob1");
 
   if(req.body.team2!='' && req.body.team2!=null)
   {   const team2=req.body.team2;
       const matches2 = await Match.find({ team2 });
       matches2.forEach(function (arrayItem) 
         {
-            if(arrayItem.date == date)
+            if(arrayItem.date == req.body.date)
             {
-                res.status(401).json({statusCode: 401, status: 'fail',name:'Team 2 cannot have 2 matches on the same day'});
+                res.status(200).json({statusCode: 401, status: 'fail',name:'Team 2 cannot have 2 matches on the same day'});
             }
         }); 
        match.team2=req.body.team2;change=true;}
+       console.log("bob2");
+
   
   if(req.body.refree!='' && req.body.refree!=null)
   {match.refree=req.body.refree;change=true;}
+  console.log("bob3");
 
-  if(req.body.date!='' && req.body.date!=null && req.body.date>new Date())
+
+  if(req.body.date!='' && req.body.date!=null && new Date(req.body.date)>new Date())
   {
       if(new Date(req.body.date)<=new Date())
-    {res.status(401).json({statusCode: 401, status: 'fail',name:'Cannot create a match with a past date or on the same day '});}
+    {res.status(200).json({statusCode: 401, status: 'fail',name:'Cannot create a match with a past date or on the same day '});}
   
     match.date=req.body.date;change=true;}
+
+    console.log("bob4");
  
   if(req.body.lineman1!='' && req.body.lineman1!=null)
   {match.lineman1=req.body.lineman1;change=true;}
@@ -142,28 +153,28 @@ if(match!=null)
       const stadiumCheck = await Match.find({ stadium });
       stadiumCheck.forEach(function (arrayItem) 
         {
-            if(arrayItem.date == date)
+            if(arrayItem.date == req.body.date)
             {
-                res.status(401).json({statusCode: 401, status: 'fail',name:'Stadium cannot have 2 matches on the same time'});
+                res.status(200).json({statusCode: 401, status: 'fail',name:'Stadium cannot have 2 matches on the same time'});
             }
         }); 
       match.stadium=req.body.stadium;change=true;}
+      console.log("bob5");
 
   if(req.body.time!='' && req.body.time!=null)
   {match.time=req.body.time;change=true;}
-
+  console.log("bob6");
   if(change)
   {await match.save(); res.status(200).json({status: 'Success', success: true});}
   else{res.status(200).json({status: 'Success but no change', success: true});}
    }
-else{res.status(401).json(new AppError('Match not found!', 401));}
+else{res.status(200).json(new AppError('Match not found!', 401));}
 
 })
 
 exports.getMatch = catchAsync(async (req, res, next) => {
-    const match= await await  Match.findOne({ _id: req.body.id},err => {console.log(err)});
-
+    const match= await Match.findOne({ _id: req.body.id},err => {console.log(err)});
     if(match!=null)
     {res.status(200).json({status: 'Success', success: true, data: {match}})}
-    else{res.status(401).json(new AppError('Match not found!', 401));}
+    else{res.status(200).json(new AppError('Match not found!', 401));}
 })

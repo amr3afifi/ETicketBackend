@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 const { promisify } = require('util')
 const Match = require('../models/matchModel')
+const { use } = require('../routes/userRouter')
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token
@@ -13,7 +14,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1]
   }
-
+console.log(token)
   if (!token) {
     return next(new AppError('You are not logged in! Please log in to access.', 401))
   }
@@ -132,47 +133,78 @@ exports.restrictTo = (...roles) => {
 
 //! CHECK REQ.USER.ID
 exports.getMyProfile = catchAsync(async (req, res, next) => {
-  // get the user from database and send his data
-  const newUser = await User.findById(req.user.id)
-if(newUser!=null){
-  res.status(200).json({
-    username: newUser.username,
-    email: newUser.email,
-    gender: newUser.gender,
-    dateOfBirth: newUser.dateOfBirth,
-    role: newUser.role,
-    first: newUser.first,
-    last: newUser.last,
-    address: newUser.address,
-    city: newUser.city,
-  })}
-  else{res.status(401).json(new AppError('User not found!', 401));}
+  
+    let token=req.body.token
+    console.log(token)
+    if (!token) {res.status(200).json(new AppError('You are not logged in! Please log in to access.', 400));}
+
+    // verification of token
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET) // error handling
+
+    // check if user still exists
+    const freshUser = await User.findById(decoded.id)
+    if (!freshUser) {res.status(200).json(new AppError('The user belonging to this token does no longer exists', 401));}
+    req.user = freshUser
+
+    console.log(freshUser)
+    const newUser = await User.findById(req.user.id)
+    if(newUser!=null){
+    res.status(200).json({status: 'Success',success: true,data:{newUser}})}
+    else{res.status(200).json(new AppError('User not found!', 401));}
 })
 //! CHECK REQ.USER.ID
 exports.updateProfile = catchAsync(async (req, res, next) => {
+
+
+  let token=req.body.token
+  console.log(token)
+  if (!token) {res.status(200).json(new AppError('You are not logged in! Please log in to access.', 400));}
+
+  // verification of token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET) // error handling
+
+  // check if user still exists
+  const freshUser = await User.findById(decoded.id)
+  if (!freshUser) {res.status(200).json(new AppError('The user belonging to this token does no longer exists', 401));}
+  req.user = freshUser
+
+
   const user = await User.findById(req.user.id)
+if(user!=null)
+{
+  console.log(user);
+  console.log(req.body);
+  change=false;
 
   if(req.body.first!='' && req.body.first!=null)
-    {user.first = req.body.first}
+    {user.first = req.body.first;change=true;}
+
+  if(req.body.password!='')
+    {user.password = req.body.password;change=true;}
 
   if(req.body.last!='' && req.body.last!=null)
-  {user.last = req.body.last}
-  
+  {user.last = req.body.last;change=true;}
+
+
   if(req.body.gender!='' && req.body.gender!=null)
-  {user.gender = req.body.gender}
+  {user.gender = req.body.gender;change=true;}
 
   if(req.body.dateOfBirth!='' && req.body.dateOfBirth!=null)
-  {user.dateOfBirth = req.body.dateOfBirth}
- 
+  {user.dateOfBirth = req.body.dateOfBirth;change=true;}
+
   if(req.body.address!='' && req.body.address!=null)
-  {user.address = req.body.address}
+  {user.address = req.body.address;change=true;}
 
   if(req.body.city!='' && req.body.city!=null)
-  {user.city = req.body.city}
+  {user.city = req.body.city;change=true;}
 
-  await user.save()
 
-  res.status(200).json({status: 'Success',success:true})
+  
+  if(change)
+  {await user.save(); res.status(200).json({status: 'Success', success: true});}
+  else{res.status(200).json({status: 'No change', success: false});}
+}
+else{res.status(200).json(new AppError('User not found!', 401));}
 
 })
 
@@ -220,10 +252,35 @@ exports.approveUser = catchAsync(async (req, res, next) => {
 
 //! CHECK REQ.USER.ID
 exports.getMyReservations= catchAsync(async (req, res, next) => {
+
+
+  let token=req.body.token
+  console.log(token)
+  if (!token) {res.status(200).json(new AppError('You are not logged in! Please log in to access.', 400));}
+
+  // verification of token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET) // error handling
+
+  // check if user still exists
+  const freshUser = await User.findById(decoded.id)
+  if (!freshUser) {res.status(200).json(new AppError('The user belonging to this token does no longer exists', 401));}
+  req.user = freshUser
+
   const newUser = await User.findById(req.user.id)
+  
 if(newUser!=null)
 {
   hobaa=newUser.reservedMatches;
+  orgDATA=[]
+  // const match = await Match.findById(arrayItem.matchid,err => {console.log(err)});
+  // hobaa.forEach(function (arrayItem) 
+  //     {
+  //       // const match = await Match.findById(arrayItem.matchid,err => {console.log(err)});
+  //       orgDATA.push([match,arrayItem.seats,arrayItem.date])
+  //     });
+  console.log(hobaa) 
+
+
   res.status(200).json({status: 'Success', success: true, data: {hobaa}});
 
 }
@@ -232,6 +289,19 @@ if(newUser!=null)
 
 //! CHECK REQ.USER.ID
 exports.bookMatch= catchAsync(async (req, res, next) => {
+
+let token=req.body.token
+  console.log(token)
+  if (!token) {res.status(200).json(new AppError('You are not logged in! Please log in to access.', 400));}
+
+  // verification of token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET) // error handling
+
+  // check if user still exists
+  const freshUser = await User.findById(decoded.id)
+  if (!freshUser) {res.status(200).json(new AppError('The user belonging to this token does no longer exists', 401));}
+  req.user = freshUser
+
 const newUser = await User.findOne({ _id: req.user.id},err => {console.log(err)});
 const match = await Match.findOne({ _id: req.body.matchid},err => {console.log(err)});
 matchToReserve=[];
@@ -241,11 +311,14 @@ if(newUser!=null)
   {
     seatsArray=match.seats;
     seatsToReserve=req.body.seats;
-
+    console.log(seatsToReserve);
     seatsToReserve.forEach(function (arrayItem) 
-    {seatsArray[arrayItem]=1;});
+    {
+      console.log(arrayItem);
+      seatsArray[arrayItem]=1;});
 
     match.seats=seatsArray;
+    console.log(match.seats)
     await match.save(err => {console.log(err)});
 
     let hoba={matchid: req.body.matchid ,seats: req.body.seats,date:req.body.date}
@@ -254,7 +327,7 @@ if(newUser!=null)
     res.status(200).json({status: 'Success', success: true});
   }
   else
-  {res.status(401).json(new AppError('Match not found!', 401));}
+  {res.status(200).json(new AppError('Match not found!', 401));}
 }
-  else{res.status(401).json(new AppError('User not found!', 401));}
+  else{res.status(200).json(new AppError('User not found!', 401));}
 })

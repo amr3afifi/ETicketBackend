@@ -30,3 +30,17 @@ const Stadium = require(`./../models/stadiumModel.js`);
     }
   
   })
+
+  exports.getStadium = catchAsync(async (req, res, next) => {
+    const name = req.body.name
+    console.log(name)
+    const stadium = await Stadium.findOne({ name })
+    if(stadium!=null)
+    {  
+        res.status(200).json({status: 'Success',success: true,data:{stadium}})
+    }
+    else{ 
+      res.status(200).json({statusCode: 401, status: 'fail',name:'Stadium not found'})
+    }
+  
+  })

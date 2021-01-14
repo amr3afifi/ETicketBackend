@@ -9,9 +9,9 @@ router.put('/approveUser', userController.approveUser)
 router.put('/declineUser', userController.declineUser)
 router.post('/signUp', userController.signUp)
 router.post('/signIn', userController.signIn)
-router.get('/me', userController.protect, userController.getMyProfile)
-router.put('/me', userController.protect, userController.updateProfile)
-router.post('/me/reservations', userController.protect, userController.getMyReservations)
-router.put('/me/bookMatch', userController.protect, userController.bookMatch)
+router.post('/me', userController.getMyProfile)
+router.put('/me', userController.updateProfile)
+router.post('/me/reservations', userController.getMyReservations)
+router.put('/me/bookMatch', userController.bookMatch)
 
 module.exports = router
